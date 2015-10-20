@@ -159,6 +159,7 @@ public struct Configuration {
         }
         rules.append(NestingRule())
         rules.append(ControlStatementRule())
+        rules.append(MarkRule())
         return rules
     }
 

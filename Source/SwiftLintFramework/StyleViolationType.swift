@@ -19,6 +19,9 @@ public enum StyleViolationType: String, CustomStringConvertible {
     case Colon                      = "Colon"
     case Nesting                    = "Nesting"
     case ControlStatement           = "Control Statement Parentheses"
+    case ReturnEmptyLines           = "Return Empty Line"
+    case Mark                       = "Mark Empty Lines"
+    
 
     public var description: String { return rawValue }
 }
