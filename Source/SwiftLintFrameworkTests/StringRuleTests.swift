@@ -95,4 +95,8 @@ class StringRuleTests: XCTestCase {
     func testOperatorWhitespace() {
         verifyRule(OperatorWhitespaceRule(), type: .OperatorWhitespace)
     }
+    
+    func testOpeningBrace() {
+        verifyRule(OpeningBraceRule(), type: .OpeningBrace)
+    }
 }

@@ -152,7 +152,7 @@ public struct Configuration {
         } else {
             rules.append(TypeBodyLengthRule())
         }
-        if let params = yaml?[.String(FunctionBodyLengthRule().identifier)].arrayOfInts {
+        if let params   = yaml?[.String(FunctionBodyLengthRule().identifier)].arrayOfInts {
             rules.append(FunctionBodyLengthRule(parameters: ruleParametersFromArray(params)))
         } else {
             rules.append(FunctionBodyLengthRule())
@@ -161,7 +161,8 @@ public struct Configuration {
         rules.append(ControlStatementRule())
         rules.append(MarkRule())
         rules.append(OperatorWhitespaceRule())
-        
+        rules.append(OpeningBrace())
+
         return rules
     }
 

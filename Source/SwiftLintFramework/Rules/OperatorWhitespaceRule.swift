@@ -10,13 +10,17 @@ import Foundation
 import SourceKittenFramework
 import SwiftXPC
 
-//TODO: Change regex
+//MARK:
+
+
 public struct OperatorWhitespaceRule: Rule {
     public init() { }
     public let identifier = "operator_whitespace"
     
     public func validateFile(file: File) -> [StyleViolation] {
-        let nonValidNeighbour = "(?:[^ ]|  |\\t)?"
+        _ = "(?:[^ ]|  |\\t)?([!\\+\\/\\-\\*\\%\\<\\>](?!=)|=|==|<=|>=|\\|\\||\\&\\&|!=)(?! )|(?<! )([\\!\\+\\/\\-\\*\\%\\<\\>](?!=)|(?<![!\\/\\%-\\+\\*])=|==|<=|>=|\\|\\||\\&\\&|!=)(?:[^ ]|  |\t)?"
+        
+        let nonValidNeighbour =  "(?:[^ ]|  |\\t)?"
         let singleOperators = "[\\!\\+\\/\\-\\*\\%\\<\\>]"
         let doubleOperators = "=|==|<=|>=|\\|\\||\\&\\&|!="
         let pattern = "\(nonValidNeighbour)(\(singleOperators)(?!=)|" +
