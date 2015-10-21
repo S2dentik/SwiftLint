@@ -15,10 +15,10 @@ public struct OpeningBraceRule: Rule {
     public let identifier = "opening_brace"
     
     public func validateFile(file: File) -> [StyleViolation] {
-        let pattern = "((?:[^( ]|[\\s(] ){)"
+        let pattern = "((?:[^( ]|[\\t\\n\\f\\r (] )\\{)"
         
         return file.matchPattern(pattern).map { match, syntaxKinds in
-            return StyleViolation(type: StyleViolationType.Mark,
+            return StyleViolation(type: StyleViolationType.OpeningBrace,
                 location: Location(file: file, offset: match.location),
                 severity: .Warning,
                 reason: "One space before opening brace and on the same line " +
