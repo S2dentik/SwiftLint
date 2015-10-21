@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		24E17F721B14BB3F008195BE /* File+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E17F701B1481FF008195BE /* File+Cache.swift */; };
 		65454F471B14D76500319A6C /* ControlStatementRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65454F451B14D73800319A6C /* ControlStatementRule.swift */; };
+		692B1EAF1BD7C1D100EAABFF /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692B1EAE1BD7C1D100EAABFF /* Test.swift */; settings = {ASSET_TAGS = (); }; };
 		69D6AA001BD648FE00909C54 /* ReturnEmptyLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6A9FE1BD648FE00909C54 /* ReturnEmptyLine.swift */; settings = {ASSET_TAGS = (); }; };
 		69D6AA021BD6501100909C54 /* MarkRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6AA011BD6501100909C54 /* MarkRule.swift */; settings = {ASSET_TAGS = (); }; };
 		69D6AA041BD6695C00909C54 /* OperatorWhitespaceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6AA031BD6695C00909C54 /* OperatorWhitespaceRule.swift */; settings = {ASSET_TAGS = (); }; };
@@ -127,6 +128,7 @@
 		5499CA961A2394B700783309 /* Components.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Components.plist; sourceTree = "<group>"; };
 		5499CA971A2394B700783309 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65454F451B14D73800319A6C /* ControlStatementRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlStatementRule.swift; sourceTree = "<group>"; };
+		692B1EAE1BD7C1D100EAABFF /* Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		69D6A9FE1BD648FE00909C54 /* ReturnEmptyLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReturnEmptyLine.swift; sourceTree = "<group>"; };
 		69D6AA011BD6501100909C54 /* MarkRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkRule.swift; sourceTree = "<group>"; };
 		69D6AA031BD6695C00909C54 /* OperatorWhitespaceRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperatorWhitespaceRule.swift; sourceTree = "<group>"; };
@@ -404,6 +406,7 @@
 				E86396C61BADAFE6002C9E88 /* ReporterTests.swift */,
 				E8BB8F9B1B17DE3B00199606 /* StringRuleTests.swift */,
 				E81224991B04F85B001783D2 /* TestHelpers.swift */,
+				692B1EAE1BD7C1D100EAABFF /* Test.swift */,
 				D0D1212219E878CC005E4BAA /* Configuration */,
 				D0D1217C19E87B05005E4BAA /* Supporting Files */,
 			);
@@ -678,6 +681,7 @@
 			files = (
 				E83A0B351A5D382B0041A60A /* VersionCommand.swift in Sources */,
 				E861519B1B0573B900C54AC0 /* LintCommand.swift in Sources */,
+				692B1EAF1BD7C1D100EAABFF /* Test.swift in Sources */,
 				D0E7B65619E9C76900EDBA4D /* main.swift in Sources */,
 				83894F221B0C928A006214E1 /* RulesCommand.swift in Sources */,
 			);

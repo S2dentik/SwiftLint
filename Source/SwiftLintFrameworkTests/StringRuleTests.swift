@@ -91,4 +91,8 @@ class StringRuleTests: XCTestCase {
     func testMark() {
         verifyRule(MarkRule(), type: .Mark, commentDoesntViolate: false)
     }
+    
+    func testOperatorWhitespace() {
+        verifyRule(OperatorWhitespaceRule(), type: .OperatorWhitespace)
+    }
 }

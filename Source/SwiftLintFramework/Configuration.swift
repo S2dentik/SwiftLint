@@ -160,6 +160,8 @@ public struct Configuration {
         rules.append(NestingRule())
         rules.append(ControlStatementRule())
         rules.append(MarkRule())
+        rules.append(OperatorWhitespaceRule())
+        
         return rules
     }
 
