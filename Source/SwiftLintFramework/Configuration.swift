@@ -162,6 +162,7 @@ public struct Configuration {
         rules.append(MarkRule())
         rules.append(OperatorWhitespaceRule())
         rules.append(OpeningBraceRule())
+        rules.append(StatementPositionRule())
 
         return rules
     }

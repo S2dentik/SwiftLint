@@ -97,6 +97,10 @@ class StringRuleTests: XCTestCase {
     }
     
     func testOpeningBrace() {
-        verifyRule(OpeningBraceRule(), type: .OpeningBrace)
+        verifyRule(OpeningBraceRule(), type: .OpeningBrace, commentDoesntViolate: false)
+    }
+    
+    func testStatementPosition() {
+        verifyRule(StatementPositionRule(), type: .StatementPosition)
     }
 }

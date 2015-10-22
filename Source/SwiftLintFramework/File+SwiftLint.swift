@@ -45,6 +45,14 @@ extension File {
                 zip(kindsInRange, syntaxKinds).filter({ $0.0 != $0.1 }).count == 0
         }.map { $0.0 }
     }
+    
+    public func matchPattern(pattern: String,
+        withoutSyntaxKinds syntaxKinds: [SyntaxKind]) -> [NSRange] {
+            return matchPattern(pattern).filter { _, kindsInRange in
+                return kindsInRange.count == syntaxKinds.count &&
+                    zip(kindsInRange, syntaxKinds).filter({ $0.0 == $0.1 }).count == 0
+                }.map { $0.0 }
+    }
 
     public func matchPattern(pattern: String) -> [(NSRange, [SyntaxKind])] {
         let regex = try! NSRegularExpression(pattern: pattern, options: [])

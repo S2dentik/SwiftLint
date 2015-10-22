@@ -23,6 +23,7 @@ public enum StyleViolationType: String, CustomStringConvertible {
     case Mark                       = "Mark Empty Lines"
     case OperatorWhitespace         = "Operator Whitespace"
     case OpeningBrace               = "Opening Brace"
+    case StatementPosition      = "Statement Position"
     
 
     public var description: String { return rawValue }

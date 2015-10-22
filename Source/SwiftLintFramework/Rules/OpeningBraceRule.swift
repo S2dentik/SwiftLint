@@ -11,21 +11,21 @@ import SourceKittenFramework
 
 public struct OpeningBraceRule: Rule {
     public init() { }
-    
+
     public let identifier = "opening_brace"
-    
+
     public func validateFile(file: File) -> [StyleViolation] {
         let pattern = "((?:[^( ]|[\\t\\n\\f\\r (] )\\{)"
-        
+
         return file.matchPattern(pattern).map { match, syntaxKinds in
             return StyleViolation(type: StyleViolationType.OpeningBrace,
                 location: Location(file: file, offset: match.location),
                 severity: .Warning,
-                reason: "One space before opening brace and on the same line " +
+                reason: "Opening brace after a space and on same line " +
                     "as declaration")
-        }
+            }
     }
-    
+
     public let example = RuleExample(
         ruleName: "Opening Brace Spacing Rule",
         ruleDescription: "Check whether there is a space before opening " +

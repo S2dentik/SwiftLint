@@ -11,6 +11,7 @@
 		65454F471B14D76500319A6C /* ControlStatementRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65454F451B14D73800319A6C /* ControlStatementRule.swift */; };
 		692B1EB21BD7E00F00EAABFF /* OpeningBraceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692B1EB11BD7E00F00EAABFF /* OpeningBraceRule.swift */; settings = {ASSET_TAGS = (); }; };
 		692B1EB31BD7EBD600EAABFF /* OpeningBraceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692B1EB11BD7E00F00EAABFF /* OpeningBraceRule.swift */; };
+		692B60AC1BD8F2E700C7AA22 /* StatementPositionRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692B60AB1BD8F2E700C7AA22 /* StatementPositionRule.swift */; settings = {ASSET_TAGS = (); }; };
 		69D6AA001BD648FE00909C54 /* ReturnEmptyLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6A9FE1BD648FE00909C54 /* ReturnEmptyLine.swift */; settings = {ASSET_TAGS = (); }; };
 		69D6AA021BD6501100909C54 /* MarkRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6AA011BD6501100909C54 /* MarkRule.swift */; settings = {ASSET_TAGS = (); }; };
 		69D6AA041BD6695C00909C54 /* OperatorWhitespaceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6AA031BD6695C00909C54 /* OperatorWhitespaceRule.swift */; settings = {ASSET_TAGS = (); }; };
@@ -130,6 +131,7 @@
 		5499CA971A2394B700783309 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65454F451B14D73800319A6C /* ControlStatementRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlStatementRule.swift; sourceTree = "<group>"; };
 		692B1EB11BD7E00F00EAABFF /* OpeningBraceRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpeningBraceRule.swift; sourceTree = "<group>"; };
+		692B60AB1BD8F2E700C7AA22 /* StatementPositionRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatementPositionRule.swift; sourceTree = "<group>"; };
 		69D6A9FE1BD648FE00909C54 /* ReturnEmptyLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReturnEmptyLine.swift; sourceTree = "<group>"; };
 		69D6AA011BD6501100909C54 /* MarkRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkRule.swift; sourceTree = "<group>"; };
 		69D6AA031BD6695C00909C54 /* OperatorWhitespaceRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperatorWhitespaceRule.swift; sourceTree = "<group>"; };
@@ -449,6 +451,7 @@
 				69D6AA031BD6695C00909C54 /* OperatorWhitespaceRule.swift */,
 				E57B23C01B1D8BF000DEA512 /* ReturnArrowWhitespaceRule.swift */,
 				69D6A9FE1BD648FE00909C54 /* ReturnEmptyLine.swift */,
+				692B60AB1BD8F2E700C7AA22 /* StatementPositionRule.swift */,
 				E88DEA811B0990A700A66CB0 /* TodoRule.swift */,
 				E88DEA871B09924C00A66CB0 /* TrailingNewlineRule.swift */,
 				E88DEA851B0991BF00A66CB0 /* TrailingWhitespaceRule.swift */,
@@ -647,6 +650,7 @@
 				E88DEA6F1B09843F00A66CB0 /* Location.swift in Sources */,
 				E88DEA881B09924C00A66CB0 /* TrailingNewlineRule.swift in Sources */,
 				69D6AA041BD6695C00909C54 /* OperatorWhitespaceRule.swift in Sources */,
+				692B60AC1BD8F2E700C7AA22 /* StatementPositionRule.swift in Sources */,
 				E88DEA771B098D0C00A66CB0 /* Rule.swift in Sources */,
 				E88DEA7C1B098D7D00A66CB0 /* LineLengthRule.swift in Sources */,
 				E88DEA801B09903300A66CB0 /* ForceCastRule.swift in Sources */,

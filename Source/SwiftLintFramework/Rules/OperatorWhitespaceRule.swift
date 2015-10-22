@@ -10,16 +10,13 @@ import Foundation
 import SourceKittenFramework
 import SwiftXPC
 
-//MARK:
-
-
 public struct OperatorWhitespaceRule: Rule {
     public init() { }
     public let identifier = "operator_whitespace"
     
     public func validateFile(file: File) -> [StyleViolation] {
         _ = "(?:[^ ]|  |\\t)([!\\+\\/\\-\\*\\%\\<\\>](?!=)|=|==|<=|>=|\\|\\||\\&\\&|!=)(?! )|(?<! )([\\!\\+\\/\\-\\*\\%\\<\\>](?!=)|(?<![!\\/\\%-\\+\\*])=|==|<=|>=|\\|\\||\\&\\&|!=)(?:[^ ]|  |\t)"
-        
+
         let nonValidNeighbour =  "(?:[^ ]|  |\\t)?"
         let singleOperators = "[\\!\\+\\/\\-\\*\\%\\<\\>]"
         let doubleOperators = "=|==|<=|>=|\\|\\||\\&\\&|!="
@@ -40,7 +37,7 @@ public struct OperatorWhitespaceRule: Rule {
             .VarLocal,
             .VarParameter
         ]
-        
+
         return validateFile(file,
             dictionaries: filterDictionary(file, dictionary: file.structure.dictionary, validKinds: checkKinds),
             violations: file.matchPattern(pattern).map { match, syntaxKind in
@@ -50,7 +47,7 @@ public struct OperatorWhitespaceRule: Rule {
                     reason: "There should be a space before and after binary operators")
         })
     }
-    
+
     public func filterDictionary(file: File, dictionary: XPCDictionary, validKinds: [SwiftKind]) -> [XPCDictionary] {
         let substructure = dictionary["key.substructure"] as? XPCArray ?? []
         var validComponents = [XPCDictionary]()
@@ -82,14 +79,14 @@ public struct OperatorWhitespaceRule: Rule {
                             let bodyLength = (dictionary["key.bodylength"] as? Int64).flatMap({ Int($0) }) ?? 0
                             let startLocation = Location(file: file, offset: offset)
                             let endLocation = Location(file: file, offset: offset + length + bodyLength - 1)
-                                
+
                             return $0.location < endLocation && startLocation < $0.location
                     }
                 }
                 return false
             }
     }
-    
+
     public let example = RuleExample(
         ruleName: "Operator Whitespace rule",
         ruleDescription: "Every binary operator should have one space before " +
