@@ -16,8 +16,9 @@ public struct OpeningBraceRule: Rule {
 
     public func validateFile(file: File) -> [StyleViolation] {
         let pattern = "((?:[^( ]|[\\t\\n\\f\\r (] )\\{)"
+        let excludingKinds = [SyntaxKind.Comment, .CommentMark, .CommentURL, .DocComment, .DocCommentField, .String]
 
-        return file.matchPattern(pattern).map { match, syntaxKinds in
+        return file.matchPattern(pattern, excludingSyntaxKinds: excludingKinds).map { match in
             return StyleViolation(type: StyleViolationType.OpeningBrace,
                 location: Location(file: file, offset: match.location),
                 severity: .Warning,

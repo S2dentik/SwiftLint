@@ -45,14 +45,6 @@ extension File {
                 zip(kindsInRange, syntaxKinds).filter({ $0.0 != $0.1 }).count == 0
         }.map { $0.0 }
     }
-    
-    public func matchPattern(pattern: String,
-        withoutSyntaxKinds syntaxKinds: [SyntaxKind]) -> [NSRange] {
-            return matchPattern(pattern).filter { _, kindsInRange in
-                return kindsInRange.count == syntaxKinds.count &&
-                    zip(kindsInRange, syntaxKinds).filter({ $0.0 == $0.1 }).count == 0
-                }.map { $0.0 }
-    }
 
     public func matchPattern(pattern: String) -> [(NSRange, [SyntaxKind])] {
         let regex = try! NSRegularExpression(pattern: pattern, options: [])
@@ -70,5 +62,29 @@ extension File {
             }
             return (match.range, kindsInRange)
         }
+    }
+    
+    //Added by S2dent
+    public func matchPattern(pattern: String,
+        excludingSyntaxKinds syntaxKinds: [SyntaxKind]) -> [NSRange] {
+        let regex = try! NSRegularExpression(pattern: pattern, options: [])
+        let range = NSRange(location: 0, length: contents.utf16.count)
+        let syntax = syntaxMap
+        let matches = regex.matchesInString(contents, options: [], range: range)
+        return matches.filter { match in
+            let tokensInRange = syntax.tokens.filter {
+                NSLocationInRange($0.offset, match.range) ||
+                    NSLocationInRange(match.range.location,
+                        NSRange(location: $0.offset, length: $0.length))
+            }
+            for token in tokensInRange {
+                if NSIntersectionRange(NSRange(location: token.offset, length:token.length), match.range).length > 0 &&
+                    syntaxKinds.contains(SyntaxKind(rawValue: token.type)!) {
+                    return false
+                }
+            }
+            
+            return true
+        }.map { $0.range }
     }
 }

@@ -16,11 +16,9 @@ public struct StatementPositionRule: Rule {
     
     public func validateFile(file: File) -> [StyleViolation] {
         let pattern = "((?:\\}|[\\s] |[\\n\\t\\r])(?:else|catch))"
+        let excludingKinds = [SyntaxKind.Comment, .CommentMark, .CommentURL, .DocComment, .DocCommentField, .String]
         
-        return file.matchPattern(pattern).flatMap { match, syntaxKinds in
-            if syntaxKinds.first != .Keyword {
-                return nil
-            }
+        return file.matchPattern(pattern, excludingSyntaxKinds: excludingKinds).flatMap { match in
             return StyleViolation(type: .StatementPosition,
                 location: Location(file: file, offset: match.location),
                 severity: .Warning,
@@ -36,7 +34,8 @@ public struct StatementPositionRule: Rule {
         nonTriggeringExamples: [
             "} else if {",
             "} else {",
-            "} catch {"
+            "} catch {",
+            "\"}else{\""
         ],
         triggeringExamples: [
             "}else if {",
