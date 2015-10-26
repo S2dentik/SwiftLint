@@ -60,14 +60,15 @@ public struct Configuration {
                 let listOfValidRuleIdentifiers = validRuleIdentifiers.joinWithSeparator("\n")
                 fputs("Valid rule identifiers:\n\(listOfValidRuleIdentifiers)\n", stderr)
             }
+
             return nil
         }
 
         // Validate that rule identifiers aren't listed multiple times
-
         if ruleSet.count != disabledRules.count {
             let duplicateRules = disabledRules.reduce([String: Int]()) { (var accu, element) in
                 accu[element] = accu[element]?.successor() ?? 1
+
                 return accu
             }.filter {
                 $0.1 > 1
@@ -76,6 +77,7 @@ public struct Configuration {
                 fputs("config error: '\(duplicateRule.0)' is listed \(duplicateRule.1) times\n",
                     stderr)
             }
+
             return nil
         }
 
@@ -107,6 +109,7 @@ public struct Configuration {
             if !NSFileManager.defaultManager().fileExistsAtPath(fullPath) {
                 failIfRequired()
                 self.init()!
+
                 return
             }
             do {
@@ -157,10 +160,8 @@ public struct Configuration {
         } else {
             rules.append(FunctionBodyLengthRule())
         }
-        rules.append(NestingRule())
-        rules.append(ControlStatementRule())
+        rules.append(NestingRule()); rules.append(ControlStatementRule())
         rules.append(MarkRule())
-        rules.append(OperatorWhitespaceRule())
         rules.append(OpeningBraceRule())
         rules.append(StatementPositionRule())
         rules.append(CommaRule())

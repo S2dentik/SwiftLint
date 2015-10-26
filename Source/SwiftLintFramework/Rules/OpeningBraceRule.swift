@@ -11,13 +11,13 @@ import SourceKittenFramework
 
 public struct OpeningBraceRule: Rule {
     public init() { }
-    
     public let identifier = "opening_brace"
-    
+
     public func validateFile(file: File) -> [StyleViolation] {
         let pattern = "((?:[^( ]|[\\t\\n\\f\\r (] )\\{)"
-        let excludingKinds = [SyntaxKind.Comment, .CommentMark, .CommentURL, .DocComment, .DocCommentField, .String]
-        
+        let excludingKinds = [SyntaxKind.Comment, .CommentMark, .CommentURL,
+            .DocComment, .DocCommentField, .String]
+
         return file.matchPattern(pattern, excludingSyntaxKinds: excludingKinds).map { match in
             return StyleViolation(type: StyleViolationType.OpeningBrace,
                 location: Location(file: file, offset: match.location),
@@ -26,7 +26,7 @@ public struct OpeningBraceRule: Rule {
                 "as declaration")
         }
     }
-    
+
     public let example = RuleExample(
         ruleName: "Opening Brace Spacing Rule",
         ruleDescription: "Check whether there is a space before opening " +

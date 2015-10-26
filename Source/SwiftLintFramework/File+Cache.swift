@@ -19,6 +19,7 @@ private struct Cache<T> {
             } else {
                 let value = factory(file)
                 values[path] = value
+
                 return value
             }
         } else {

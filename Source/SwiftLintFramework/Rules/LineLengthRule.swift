@@ -35,6 +35,7 @@ public struct LineLengthRule: ParameterizedRule {
                         "currently \(line.content.characters.count) characters")
                 }
             }
+
             return nil
         }
     }

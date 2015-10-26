@@ -35,6 +35,7 @@ public struct FileLengthRule: ParameterizedRule {
                     "currently contains \(lineCount)")]
             }
         }
+
         return []
     }
 

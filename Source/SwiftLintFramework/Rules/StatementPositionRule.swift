@@ -11,13 +11,14 @@ import SourceKittenFramework
 
 public struct StatementPositionRule: Rule {
     public init() {}
-    
+
     public let identifier = "statement_position"
-    
+
     public func validateFile(file: File) -> [StyleViolation] {
         let pattern = "((?:\\}|[\\s] |[\\n\\t\\r])(?:else|catch))"
-        let excludingKinds = [SyntaxKind.Comment, .CommentMark, .CommentURL, .DocComment, .DocCommentField, .String]
-        
+        let excludingKinds = [SyntaxKind.Comment, .CommentMark, .CommentURL,
+            .DocComment, .DocCommentField, .String]
+
         return file.matchPattern(pattern, excludingSyntaxKinds: excludingKinds).flatMap { match in
             return StyleViolation(type: .StatementPosition,
                 location: Location(file: file, offset: match.location),
@@ -26,7 +27,7 @@ public struct StatementPositionRule: Rule {
                     "after previous declaration")
         }
     }
-    
+
     public let example = RuleExample(
         ruleName: "Statement Position Rule",
         ruleDescription: "This rule checks whether statements are correctly " +

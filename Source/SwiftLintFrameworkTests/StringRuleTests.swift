@@ -87,27 +87,27 @@ class StringRuleTests: XCTestCase {
     func testColon() {
         verifyRule(ColonRule(), type: .Colon)
     }
-    
+
     func testMark() {
         verifyRule(MarkRule(), type: .Mark, commentDoesntViolate: false)
     }
-    
-    func testOperatorWhitespace() {
-        verifyRule(OperatorWhitespaceRule(), type: .OperatorWhitespace)
-    }
-    
+
+//    func testOperatorWhitespace() {
+//        verifyRule(OperatorWhitespaceRule(), type: .OperatorWhitespace)
+//    }
+
     func testOpeningBrace() {
         verifyRule(OpeningBraceRule(), type: .OpeningBrace)
     }
-    
+
     func testStatementPosition() {
         verifyRule(StatementPositionRule(), type: .StatementPosition)
     }
-    
+
     func testComma() {
         verifyRule(CommaRule(), type: .Comma)
     }
-    
+
     func testReturn() {
         verifyRule(ReturnPositionRule(), type: .ReturnPosition)
     }

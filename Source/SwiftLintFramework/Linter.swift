@@ -17,6 +17,7 @@ public struct Linter {
 
     public var styleViolations: [StyleViolation] {
         let regions = file.regions()
+
         return rules.flatMap { rule in
             return rule.validateFile(self.file).filter { styleViolation in
                 guard let violationRegion = regions.filter({
@@ -24,6 +25,7 @@ public struct Linter {
                 }).first else {
                     return true
                 }
+
                 return !violationRegion.disabledRuleIdentifiers.contains(rule.identifier)
             }
         }

@@ -25,6 +25,7 @@ public struct TodoRule: Rule {
             if syntaxKinds.filter({ !$0.isCommentLike }).count > 0 {
                 return nil
             }
+
             return StyleViolation(type: .TODO,
                 location: Location(file: file, offset: range.location),
                 severity: .Warning,

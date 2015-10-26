@@ -19,6 +19,7 @@ struct RulesCommand: CommandType {
             .map({ "\($0.example.ruleName) (\($0.identifier))" })
             .joinWithSeparator("\n")
         print(ruleDescriptions)
+
         return .Success()
     }
 }

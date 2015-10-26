@@ -24,6 +24,7 @@ public struct LeadingWhitespaceRule: Rule {
                 reason: "File shouldn't start with whitespace: " +
                 "currently starts with \(countOfLeadingWhitespace) whitespace characters")]
         }
+
         return []
     }
 

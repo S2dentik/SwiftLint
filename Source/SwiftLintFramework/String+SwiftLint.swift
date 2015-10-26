@@ -36,6 +36,7 @@ extension String {
         if dict["key.accessibility"] as? String == privateACL && characters.first == "_" {
             return self[startIndex.successor()..<endIndex]
         }
+
         return self
     }
 }
@@ -53,6 +54,7 @@ extension NSString {
                 previousIndex = index
                 index = NSMaxRange(lineRangeForRange(NSRange(location: index, length: 1)))
             }
+
             return (lineRangeStart, range.location - previousIndex + 1)
         }
     }

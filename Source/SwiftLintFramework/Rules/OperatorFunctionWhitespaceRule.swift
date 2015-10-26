@@ -21,8 +21,8 @@ public struct OperatorFunctionWhitespaceRule: Rule {
             operators.joinWithSeparator("") +
             "]+\(zeroOrManySpaces)(<[A-Z]+>)?\\("
         let pattern2 = "func\(zeroOrManySpaces)[" +
-            operators.joinWithSeparator("") +
-            "]+\\s+(<[A-Z]+>)?\\("
+            operators.joinWithSeparator("") + "]+\\s+(<[A-Z]+>)?\\("
+
         return file.matchPattern("(\(pattern1)|\(pattern2))").filter { _, syntaxKinds in
             return syntaxKinds.first == .Keyword
         }.map { range, _ in

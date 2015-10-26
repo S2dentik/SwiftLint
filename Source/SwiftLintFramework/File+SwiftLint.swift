@@ -35,6 +35,7 @@ extension File {
                     disabledRuleIdentifiers: disabledRules)
             )
         }
+
         return regions
     }
 
@@ -51,6 +52,7 @@ extension File {
         let range = NSRange(location: 0, length: contents.utf16.count)
         let syntax = syntaxMap
         let matches = regex.matchesInString(contents, options: [], range: range)
+
         return matches.map { match in
             let tokensInRange = syntax.tokens.filter {
                 NSLocationInRange($0.offset, match.range) ||
@@ -60,10 +62,11 @@ extension File {
             let kindsInRange = tokensInRange.flatMap {
                 SyntaxKind(rawValue: $0.type)
             }
+
             return (match.range, kindsInRange)
         }
     }
-    
+
     //Added by S2dent
     /**
     This function returns only matches that are not contained in a syntax kind
@@ -82,6 +85,7 @@ extension File {
         let range = NSRange(location: 0, length: contents.utf16.count)
         let syntax = syntaxMap
         let matches = regex.matchesInString(contents, options: [], range: range)
+
         return matches.filter { match in
             let tokensInRange = syntax.tokens.filter {
                 NSLocationInRange($0.offset, match.range) ||
@@ -89,12 +93,13 @@ extension File {
                         NSRange(location: $0.offset, length: $0.length))
             }
             for token in tokensInRange {
-                if NSIntersectionRange(NSRange(location: token.offset, length:token.length), match.range).length > 0 &&
+                if NSIntersectionRange(NSRange(location: token.offset,
+                    length:token.length), match.range).length > 0 &&
                     syntaxKinds.contains(SyntaxKind(rawValue: token.type)!) {
                     return false
                 }
             }
-            
+
             return true
         }.map { $0.range }
     }

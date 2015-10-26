@@ -13,10 +13,8 @@ import SwiftXPC
 public struct OperatorWhitespaceRule: Rule {
     public init() { }
     public let identifier = "operator_whitespace"
-    
-    public func validateFile(file: File) -> [StyleViolation] {
-        _ = "(?:[^ ]|  |\\t)([!\\+\\/\\-\\*\\%\\<\\>](?!=)|=|==|<=|>=|\\|\\||\\&\\&|!=)(?! )|(?<! )([\\!\\+\\/\\-\\*\\%\\<\\>](?!=)|(?<![!\\/\\%-\\+\\*])=|==|<=|>=|\\|\\||\\&\\&|!=)(?:[^ ]|  |\t)"
 
+    public func validateFile(file: File) -> [StyleViolation] {
         let nonValidNeighbour =  "(?:[^ ]|  |\\t)?"
         let singleOperators = "[\\!\\+\\/\\-\\*\\%\\<\\>]"
         let doubleOperators = "=|==|<=|>=|\\|\\||\\&\\&|!="
@@ -24,7 +22,7 @@ public struct OperatorWhitespaceRule: Rule {
             "\(doubleOperators))(?! )" + "|" +
             "(?<! )(\(singleOperators)(?!=)|(?<![!\\/\\%-\\+\\*])" +
             "\(doubleOperators))\(nonValidNeighbour)"
-        
+
         let checkKinds: [SwiftKind] = [
             .If,
             .While,
@@ -39,7 +37,8 @@ public struct OperatorWhitespaceRule: Rule {
         ]
 
         return validateFile(file,
-            dictionaries: filterDictionary(file, dictionary: file.structure.dictionary, validKinds: checkKinds),
+            dictionaries: filterDictionary(file, dictionary: file.structure.dictionary,
+                validKinds: checkKinds),
             violations: file.matchPattern(pattern).map { match, syntaxKind in
                 return StyleViolation(type: StyleViolationType.OperatorWhitespace,
                     location: Location(file: file, offset: match.location),
@@ -48,23 +47,28 @@ public struct OperatorWhitespaceRule: Rule {
         })
     }
 
-    public func filterDictionary(file: File, dictionary: XPCDictionary, validKinds: [SwiftKind]) -> [XPCDictionary] {
+    public func filterDictionary(file: File, dictionary: XPCDictionary,
+        validKinds: [SwiftKind]) -> [XPCDictionary] {
         let substructure = dictionary["key.substructure"] as? XPCArray ?? []
         var validComponents = [XPCDictionary]()
+
         return substructure.flatMap { subItem -> [XPCDictionary] in
             if let subDict = subItem as? XPCDictionary {
                 if let substr = subDict["key.substructure"] as? XPCDictionary {
-                    let childComponents = self.filterDictionary(file, dictionary: substr, validKinds: validKinds)
+                    let childComponents = self.filterDictionary(file,
+                        dictionary: substr, validKinds: validKinds)
                     validComponents.appendContentsOf(childComponents)
                 }
                 validComponents.append(subDict)
             }
+
             return validComponents
             }.filter {
             if let kindString = $0["key.kind"] as? String,
                 let kind = SwiftKind(rawValue: kindString) {
                     return validKinds.contains(kind)
                 }
+
             return false
         }
     }
@@ -76,13 +80,16 @@ public struct OperatorWhitespaceRule: Rule {
                 for dictionary in dictionaries {
                     if let offset = (dictionary["key.offset"] as? Int64).flatMap({ Int($0) }),
                         let length = (dictionary["key.length"] as? Int64).flatMap({ Int($0) }) {
-                            let bodyLength = (dictionary["key.bodylength"] as? Int64).flatMap({ Int($0) }) ?? 0
+                            let bodyLength = (dictionary["key.bodylength"]
+                                as? Int64).flatMap({ Int($0) }) ?? 0
                             let startLocation = Location(file: file, offset: offset)
-                            let endLocation = Location(file: file, offset: offset + length + bodyLength - 1)
+                            let endLocation = Location(file: file,
+                                offset: offset + length + bodyLength - 1)
 
                             return $0.location < endLocation && startLocation < $0.location
                     }
                 }
+
                 return false
             }
     }

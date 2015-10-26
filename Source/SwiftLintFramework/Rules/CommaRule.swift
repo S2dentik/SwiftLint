@@ -12,11 +12,12 @@ import SourceKittenFramework
 public struct CommaRule: Rule {
     public init() { }
     public let identifier = "comma"
-    
+
     public func validateFile(file: File) -> [StyleViolation] {
         let pattern = "(\\,[^\\s])|(\\s\\,)"
-        let excludingKinds = [SyntaxKind.Comment, .CommentMark, .CommentURL, .DocComment, .DocCommentField, .String]
-        
+        let excludingKinds = [SyntaxKind.Comment, .CommentMark, .CommentURL,
+            .DocComment, .DocCommentField, .String]
+
         return file.matchPattern(pattern, excludingSyntaxKinds: excludingKinds).flatMap { match in
             return StyleViolation(type: .Comma,
                 location: Location(file: file, offset: match.location),
@@ -25,7 +26,7 @@ public struct CommaRule: Rule {
                 "commas")
         }
     }
-    
+
     public let example = RuleExample(
         ruleName: "Comma Spacing Rule",
         ruleDescription: "One space before and no after must be present next to " +

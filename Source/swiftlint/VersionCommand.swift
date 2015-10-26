@@ -23,6 +23,7 @@ struct VersionCommand: CommandType {
         default:
             break
         }
+
         return .Success()
     }
 }

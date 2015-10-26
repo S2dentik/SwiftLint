@@ -29,7 +29,6 @@ public struct MarkRule: Rule {
         // ex: //MARK: \n let a = 1
         let pattern4 = file.matchPattern("(\(markRegex)[^\n]*\n[^ \t\n])")
 
-
         return (pattern1 + pattern2 + pattern3 + pattern4).map { match, syntaxKinds in
             return StyleViolation(type: StyleViolationType.Mark,
                 location: Location(file: file, offset: match.location),

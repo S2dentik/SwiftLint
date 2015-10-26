@@ -32,10 +32,10 @@ struct LintCommand: CommandType {
                         configuration: configuration,
                         strict: options.strict)
                 }
+
                 return .Failure(CommandantError<()>.CommandError())
             }
 
-            // Otherwise parse path.
             return lint(options.path, configuration: configuration, strict: options.strict)
         }
     }
@@ -54,6 +54,7 @@ struct LintCommand: CommandType {
         if files.count > 0 {
             return lint(files, configuration: configuration, strict: strict)
         }
+
         return .Failure(CommandantError<()>.UsageError(description: "No lintable files found at" +
             " path \(path)"))
     }
@@ -96,6 +97,7 @@ struct LintCommand: CommandType {
         } else if numberOfSeriousViolations <= 0 {
             return .Success()
         }
+
         return .Failure(CommandantError<()>.CommandError())
     }
 
@@ -111,6 +113,7 @@ struct LintCommand: CommandType {
                 return [absolutePath]
             }
         }
+
         return []
     }
 }

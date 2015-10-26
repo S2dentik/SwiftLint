@@ -26,7 +26,6 @@ public enum StyleViolationType: String, CustomStringConvertible {
     case StatementPosition          = "Statement Position"
     case Comma                      = "Comma"
     case ReturnPosition             = "Return Position"
-    
 
     public var description: String { return rawValue }
 }

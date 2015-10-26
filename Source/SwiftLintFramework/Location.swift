@@ -13,8 +13,6 @@ public struct Location: CustomStringConvertible, Comparable {
     public let line: Int?
     public let character: Int?
     public var description: String {
-        // Xcode likes warnings and errors in the following format:
-        // {full_path_to_file}{:line}{:character}: {error,warning}: {content}
         return (file ?? "<nopath>") +
             (line.map({ ":\($0)" }) ?? "") +
             (character.map({ ":\($0)" }) ?? "")
@@ -53,5 +51,6 @@ public func < (lhs: Location, rhs: Location) -> Bool {
     if lhs.line != rhs.line {
         return lhs.line < rhs.line
     }
+
     return lhs.character < rhs.character
 }

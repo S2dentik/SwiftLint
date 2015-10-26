@@ -19,7 +19,6 @@ public struct XcodeReporter: Reporter {
     }
 
     internal static func generateForSingleViolation(violation: StyleViolation) -> String {
-        // {full_path_to_file}{:line}{:character}: {error,warning}: {content}
         return "\(violation.location): " +
             "\(violation.severity.rawValue.lowercaseString): " +
             "\(violation.type) Violation: " +

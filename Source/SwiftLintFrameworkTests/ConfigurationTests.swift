@@ -22,6 +22,7 @@ class ConfigurationTests: XCTestCase {
     func testEmptyConfiguration() {
         guard let config = Configuration(yaml: "") else {
             XCTFail("empty YAML string should yield non-nil Configuration")
+
             return
         }
         XCTAssertEqual(config.disabledRules, [])

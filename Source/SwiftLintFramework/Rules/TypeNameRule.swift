@@ -20,6 +20,7 @@ public struct TypeNameRule: ASTRule {
 
     public func validateFile(file: File, dictionary: XPCDictionary) -> [StyleViolation] {
         let substructure = dictionary["key.substructure"] as? XPCArray ?? []
+
         return substructure.flatMap { subItem -> [StyleViolation] in
             var violations = [StyleViolation]()
             if let subDict = subItem as? XPCDictionary,
@@ -30,6 +31,7 @@ public struct TypeNameRule: ASTRule {
                     self.validateFile(file, kind: kind, dictionary: subDict)
                 )
             }
+
             return violations
         }
     }
@@ -71,6 +73,7 @@ public struct TypeNameRule: ASTRule {
                     "'\(name)'"))
             }
         }
+
         return violations
     }
 

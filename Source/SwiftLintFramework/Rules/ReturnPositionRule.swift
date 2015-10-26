@@ -13,21 +13,23 @@ import SwiftXPC
 public struct ReturnPositionRule: Rule {
     public init() { }
     public let identifier = "return_position"
-    
+
     public func validateFile(file: File) -> [StyleViolation] {
-        let wrongCharactersInName = "[^a-z0-9A-Z\\_\\$]"
-        let spaceAfterBrace = "\\{ "
-        let nextLineAfterBrace = "[\\{\\:][^\\n\\}]*\\n[\\t ]*"
+        let spaceAfterBraceColon = "[\\{\\:] "
+        let nextLineAfterBrace = "[\\{][^\\n\\}]*\\n[\\t ]*"
+        let nextLineAfterColon = "[\\:][\\t ]*\\n[\\t ]*"
         let oneEmptyLineIfNotBrace = "[^\\s{:][\\t ]*\\n[\\t ]*\\n[\\t ]*"
-        let returnPattern = "(return)"
-        let pattern = "(?:" + spaceAfterBrace + "|" + nextLineAfterBrace + "|" +
-            oneEmptyLineIfNotBrace + ")" + returnPattern + wrongCharactersInName
-        let excludingKinds = [SyntaxKind.Comment, .CommentMark, .CommentURL, .DocComment, .DocCommentField, .String]
+        let returnPattern = "(return)[^a-z0-9A-Z\\_\\$]"
+        let pattern = "(?:" + spaceAfterBraceColon + "|" + nextLineAfterBrace + "|" +
+            nextLineAfterColon + "|" + oneEmptyLineIfNotBrace + ")" + returnPattern
+        let excludingKinds = [SyntaxKind.Comment, .CommentMark, .CommentURL,
+            .DocComment, .DocCommentField, .String]
         //Non-capturing group not working somehow so correct the range
         let correctReturns = file.matchPattern(pattern, excludingSyntaxKinds: excludingKinds).map {
-            NSRange(location: $0.location + $0.length - 7, length: 6)
+            NSRange(location: $0.location + $0.length - 7, length: 7)
         }
         let allReturns = file.matchPattern(returnPattern, excludingSyntaxKinds: excludingKinds)
+
         return allReturns.filter { !correctReturns.contains($0) }.map { match in
                 return StyleViolation(type: .ReturnPosition,
                     location: Location(file: file, offset: match.location),
@@ -35,7 +37,7 @@ public struct ReturnPositionRule: Rule {
                     reason: "Return statement must be placed correctly")
         }
     }
-    
+
     public let example = RuleExample(
         ruleName: "Return Rule",
         ruleDescription: "This rule checks whether you have put empty lines " +

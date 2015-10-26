@@ -20,6 +20,7 @@ public struct NestingRule: ASTRule {
 
     public func validateFile(file: File, dictionary: XPCDictionary) -> [StyleViolation] {
         let substructure = dictionary["key.substructure"] as? XPCArray ?? []
+
         return substructure.flatMap { subItem -> [StyleViolation] in
             var violations = [StyleViolation]()
             if let subDict = subItem as? XPCDictionary,
@@ -30,6 +31,7 @@ public struct NestingRule: ASTRule {
                     self.validateFile(file, kind: kind, dictionary: subDict)
                 )
             }
+
             return violations
         }
     }
@@ -46,11 +48,7 @@ public struct NestingRule: ASTRule {
         level: Int) -> [StyleViolation] {
         var violations = [StyleViolation]()
         let typeKinds: [SwiftDeclarationKind] = [
-            .Class,
-            .Struct,
-            .Typealias,
-            .Enum,
-            .Enumcase
+            .Class, .Struct, .Typealias, .Enum, .Enumcase
         ]
         if let offset = (dictionary["key.offset"] as? Int64).flatMap({ Int($0) }) {
             if level > 1 && typeKinds.contains(kind) {
@@ -78,10 +76,12 @@ public struct NestingRule: ASTRule {
             if let kind = kind, subDict = subDict {
                 return (kind, subDict)
             }
+
             return nil
         }.flatMap { (kind, dict) -> [StyleViolation] in
             return self.validateFile(file, kind: kind, dictionary: dict, level: level + 1)
         })
+
         return violations
     }
 
