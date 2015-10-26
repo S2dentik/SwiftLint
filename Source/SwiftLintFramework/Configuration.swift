@@ -163,6 +163,8 @@ public struct Configuration {
         rules.append(OperatorWhitespaceRule())
         rules.append(OpeningBraceRule())
         rules.append(StatementPositionRule())
+        rules.append(CommaRule())
+        rules.append(ReturnPositionRule())
 
         return rules
     }

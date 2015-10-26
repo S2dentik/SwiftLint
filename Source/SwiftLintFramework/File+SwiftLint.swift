@@ -65,6 +65,17 @@ extension File {
     }
     
     //Added by S2dent
+    /**
+    This function returns only matches that are not contained in a syntax kind
+    specified.
+
+    - parameter pattern: regex pattern to be matched inside file.
+    - parameter excludingSyntaxKinds: syntax kinds the matches to be filtered
+    when inside them.
+
+    - returns: An array of [NSRange] objects consisting of regex matches inside
+    file contents.
+    */
     public func matchPattern(pattern: String,
         excludingSyntaxKinds syntaxKinds: [SyntaxKind]) -> [NSRange] {
         let regex = try! NSRegularExpression(pattern: pattern, options: [])

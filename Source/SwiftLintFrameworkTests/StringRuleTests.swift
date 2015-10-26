@@ -103,4 +103,12 @@ class StringRuleTests: XCTestCase {
     func testStatementPosition() {
         verifyRule(StatementPositionRule(), type: .StatementPosition)
     }
+    
+    func testComma() {
+        verifyRule(CommaRule(), type: .Comma)
+    }
+    
+    func testReturn() {
+        verifyRule(ReturnPositionRule(), type: .ReturnPosition)
+    }
 }
